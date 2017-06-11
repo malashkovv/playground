@@ -1,0 +1,19 @@
+---
+- name: Install Apache
+  yum: 
+    name: httpd 
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Deploy conf file
+  template: 
+    src: httpd.conf 
+    dest: /etc/httpd/conf/httpd.conf
+  notify: 
+    - Restart Apache
+
+- name: Deploy index.html
+  template: 
+    src: index.html
+    dest: /var/www/html/index.html
+    mode: 0644

@@ -1,0 +1,6 @@
+---
+- hosts: datacenter
+  sudo: yes
+  tasks: 
+  - name: Ping
+    ping: 

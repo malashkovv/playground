@@ -8,4 +8,4 @@ For fun and study :)
 
 ### How do I get set up? ###
 
-Just go into sub-folders and do `vagrant up` 
+Just go into sub-folders and do what readme says. 

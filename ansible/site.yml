@@ -1,0 +1,14 @@
+---
+## Web Servers
+- hosts: web
+  roles:
+    - common
+    - webservers
+  sudo: yes
+
+## DB Servers
+- hosts: db
+  roles:
+    - common
+    - dbservers
+  sudo: yes
