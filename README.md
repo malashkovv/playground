@@ -1,6 +1,6 @@
 # README #
 
-This a playground for different IT tools (especcialy Python tools). 
+This a playground for different IT tools (especially Python tools). 
 
 ### What is this repository for? ###
 
