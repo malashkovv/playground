@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
-	
+	config.ssh.insert_key = false
 	config.vm.define "acs" do |acs|
 		acs.vm.box = "ubuntu/trusty64"
 		acs.vm.hostname = "acs"
