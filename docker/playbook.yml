@@ -17,3 +17,9 @@
 
     - name: Ensure docker is restarted
       service: name=docker state=restarted
+
+    - name: Add user to docker group
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
