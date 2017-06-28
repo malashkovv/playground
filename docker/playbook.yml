@@ -1,0 +1,19 @@
+- name: Install latest Docker 
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure repository key is installed
+      apt_key:
+        id: "58118E89F3A912897C070ADBF76221572C52609D"
+        keyserver: "hkp://p80.pool.sks-keyservers.net:80"
+        state: present
+
+    - name: Ensure docker registry is available
+      apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' state=present
+
+    - name: Ensure docker and dependencies are installed
+      apt: name=docker-engine update_cache=yes
+
+    - name: Ensure docker is restarted
+      service: name=docker state=restarted
