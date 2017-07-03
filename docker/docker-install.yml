@@ -1,0 +1,22 @@
+- name: Install latest Docker (CentOS)
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install required packages 
+      yum: 
+        state: present
+        name: yum-utils,device-mapper-persistent-data,lvm2
+
+    - name: Add Docker repository
+      shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install docker CE
+      yum: 
+        name: docker-ce
+        state: present
+
+    - name: Start docker 
+      service:
+        name: docker
+        state: started
