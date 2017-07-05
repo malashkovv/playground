@@ -1,0 +1,23 @@
+- name: Install PostgreSQL (CentOS)
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install PostgreSQL Server
+      yum:
+        state: present
+        name: '{{ item }}'
+      with_items:
+        - python-psycopg2
+        - postgresql-server
+        - postgresql
+
+    - name: Initiate database
+      command: service postgresql initdb
+               creates=/var/lib/pgsql/data/postgresql.conf
+
+    - name: Start PostgreSQL Server
+      service:
+        state: started
+        name: postgresql
+        enabled: yes
