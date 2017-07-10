@@ -101,3 +101,5 @@ Contact GitHub API Training Shop Blog About
 
 .vagrant/
 *.retry
+.idea/
+.idea/*.xml

@@ -1,0 +1,47 @@
+- name: Install reuqired packages
+  yum:
+    state: present
+    name: '{{ item }}'
+  with_items:
+    - yum-utils
+    - zlib-devel
+    - bzip2-devel
+    - openssl-devel
+    - ncurses-devel
+    - sqlite-devel
+
+- name: Download
+  get_url:
+    url: https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
+    dest: /tmp/Python-2.7.12.tar.xz
+    mode: 0777
+
+- name: Creates temp directory
+  file: path=/tmp/python-tmp state=directory
+
+- unarchive:
+    src: /tmp/Python-2.7.12.tar.xz
+    dest: /tmp/python-tmp
+
+- command: ./configure --prefix=/usr/local
+  args:
+    chdir: /tmp/python-tmp/Python-2.7.12
+
+- make:
+    chdir: /tmp/python-tmp/Python-2.7.12
+    target: altinstall
+
+- name: Install pip
+  easy_install:
+    name: pip
+    state: latest
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+
+- name: Install requirements
+  pip:
+    requirements: /vagrant/requirements.txt
+    virtualenv: /tmp/py27
+    virtualenv_python: /usr/local/bin/python2.7

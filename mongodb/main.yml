@@ -1,0 +1,10 @@
+- name: Install MongoDB
+  hosts: all
+  become: true
+
+  vars:
+    main_user: vagrant
+
+  tasks:
+    - include: mongo_install.yml
+    - include: python_install.yml

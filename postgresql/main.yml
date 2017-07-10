@@ -1,0 +1,10 @@
+- name: Install PostgreSQL
+  hosts: all
+  become: true
+
+  vars:
+    main_user: vagrant
+
+  tasks:
+    - include: postgresql_install.yml
+    - include: postgresql_add_user.yml
