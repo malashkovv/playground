@@ -7,3 +7,4 @@
 
   tasks:
     - include: mongo_install.yml
+    - include: python_install.yml
