@@ -1,6 +1,0 @@
-- name: Install Databases
-  hosts: all
-  become: true
-
-  tasks:
-    - include: postgresql-install.yml
