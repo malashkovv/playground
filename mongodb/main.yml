@@ -4,6 +4,9 @@
 
   vars:
     main_user: vagrant
+    python_version_major: 3.6
+    python_version_minor: 1
+    python_env: mongosandbox
 
   tasks:
     - include: mongo_install.yml
