@@ -1,4 +1,5 @@
 DROP TABLE users;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR NOT NULL,
@@ -6,4 +7,5 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (first_name, last_name) VALUES('Greg', 'Lira');
-select * from users;
+
+SELECT * FROM users;
