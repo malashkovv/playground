@@ -16,6 +16,13 @@
         name: docker-ce
         state: present
 
+    - name: Add vagrant user to docker group 
+      user:
+        name: vagrant
+        shell: /bin/bash
+        groups: docker
+        append: yes        
+
     - name: Start docker 
       service:
         name: docker
