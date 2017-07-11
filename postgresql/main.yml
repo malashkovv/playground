@@ -7,4 +7,4 @@
 
   tasks:
     - include: postgresql_install.yml
-    - include: postgresql_add_user.yml
+    - include: postgresql_config.yml

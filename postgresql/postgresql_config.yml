@@ -1,0 +1,35 @@
+- name: Add user to PostgreSQL
+  postgresql_user:
+    name: '{{ main_user }}'
+    password: NULL
+    role_attr_flags: CREATEDB,SUPERUSER
+  become: true
+  become_user: postgres
+  become_method: sudo
+
+- name: Create database for a user
+  postgresql_db:
+    name: '{{ main_user }}'
+  become: true
+  become_user: postgres
+  become_method: sudo
+
+- name: Disable firewalld service
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: Deploy config files
+  template:
+    src: '/vagrant/config/{{ item }}'
+    dest: '/var/lib/pgsql/data/{{ item }}'
+  with_items:
+    - pg_hba.conf
+    - postgresql.conf
+
+- name: Restart PostgreSQL Server
+  service:
+    state: restarted
+    name: postgresql
+    enabled: yes
