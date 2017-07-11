@@ -1,11 +1,13 @@
-DROP TABLE users;
+CREATE SCHEMA test;
 
-CREATE TABLE users (
+DROP TABLE IF EXISTS test.users;
+
+CREATE TABLE test.users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR NOT NULL
 );
 
-INSERT INTO users (first_name, last_name) VALUES('Greg', 'Lira');
+INSERT INTO test.users (first_name, last_name) VALUES('Greg', 'Lira');
 
-SELECT * FROM users;
+SELECT * FROM test.users;
