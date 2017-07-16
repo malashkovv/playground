@@ -4,8 +4,10 @@ MAINTAINER malashkovv@gmail.com
 
 WORKDIR /web
 
-RUN pip install Flask
+RUN pip install Flask Redis
 
-EXPOSE 8000
+ADD . /web
+
+EXPOSE 80
 
 CMD ["python", "web/app.py"]
