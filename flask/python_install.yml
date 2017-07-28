@@ -1,0 +1,47 @@
+- name: Install required packages
+  yum:
+    state: present
+    name: '{{ item }}'
+  with_items:
+    - yum-utils
+    - zlib-devel
+    - bzip2-devel
+    - openssl-devel
+    - ncurses-devel
+    - sqlite-devel
+
+- name: Download
+  get_url:
+    url: 'https://www.python.org/ftp/python/{{ python_version_major }}.{{ python_version_minor }}/Python-{{ python_version_major }}.{{ python_version_minor }}.tar.xz'
+    dest: '/tmp/Python-{{ python_version_major }}.{{ python_version_minor }}.tar.xz'
+    mode: 0777
+
+- name: Creates temp directory
+  file: path=/tmp/python-tmp state=directory
+
+- unarchive:
+    src: '/tmp/Python-{{ python_version_major }}.{{ python_version_minor }}.tar.xz'
+    dest: /tmp/python-tmp
+
+- command: ./configure --prefix=/usr/local
+  args:
+    chdir: '/tmp/python-tmp/Python-{{ python_version_major }}.{{ python_version_minor }}'
+
+- make:
+    chdir: '/tmp/python-tmp/Python-{{ python_version_major }}.{{ python_version_minor }}'
+    target: altinstall
+
+- name: Install pip
+  easy_install:
+    name: pip
+    state: latest
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+
+- name: Install requirements
+  pip:
+    requirements: /vagrant/requirements.txt
+    virtualenv: '/usr/local/pyenvs/{{ python_env }}'
+    virtualenv_python: '/usr/local/bin/python{{ python_version_major }}'
